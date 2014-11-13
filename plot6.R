@@ -16,10 +16,14 @@ source("getData.R")
 mv <- SCC[grep("vehicles",SCC$EI.Sector,ignore.case = TRUE),]
 
 #merge datasets
-NEI_mv <- merge(NEI,mv,by.x="SCC",by.y="SCC",all=FALSE)
+# NEI_mv <- merge(NEI,mv,by.x="SCC",by.y="SCC",all=FALSE)
+NEI_mv <- inner_join(NEI,mv, by=c("SCC"))
 
 #create tbl_df objects
 sqlNEI <- tbl_df(NEI_mv)
+
+#remove NEI_mv variable
+rm(NEI_mv)
 
 #Summarise the data
 sqlNEIYear <- 
@@ -29,9 +33,6 @@ sqlNEIYear <-
     select(year,fips,city,Emissions) %>%
     group_by(year,city) %>%
     summarise(total = sum(Emissions))
-
-dim(sqlNEIYear)
-head(sqlNEIYear)
 
 #Open the png file
 png(file = "plot6.png",width = 480, height = 480, units = "px") 
