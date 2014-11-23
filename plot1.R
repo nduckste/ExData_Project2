@@ -27,6 +27,7 @@ with(sqlNEIYear,plot(year,total
                  ,xlab = "Year"
                  ,ylab = "PM2.5"
                  ,type = "l"
+                 ,main = "Total Emissions across United States"
             )
     )
 

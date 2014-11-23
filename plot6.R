@@ -38,14 +38,23 @@ sqlNEIYear <-
 png(file = "plot6.png",width = 480, height = 480, units = "px") 
 
 #create the plot
-qplot(year,total
-      ,data=sqlNEIYear
-      ,geom=c("point","smooth")
-      ,method="lm"
-      ,color=city
-      ,main="Motor Vehicle Emissions"
-      ,ylab=expression(PM[2.5])
-)
+# qplot(year,total
+#       ,data=sqlNEIYear
+#       ,geom=c("point","smooth")
+#       ,method="lm"
+#       ,color=city
+#       ,main="Motor Vehicle Emissions"
+#       ,ylab=expression(PM[2.5])
+# )
+g <- ggplot(data=sqlNEIYear,aes(year,total))
+g + 
+    geom_point() +
+    geom_smooth(method = "lm") +
+    facet_grid(. ~ city) +
+    labs(y = expression(PM[2.5]), x = "Year") +
+    scale_y_continuous(breaks=seq(0, 6000, 200))
+#     scale_y_continuous(limits=c(0,6000),breaks=seq(0, 6000, 500))
+#     coord_cartesian(ylim = c(0, 6000)) 
 
 
 #close the png file

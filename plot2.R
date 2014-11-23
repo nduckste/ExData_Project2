@@ -27,6 +27,7 @@ with(sqlNEIYear,plot(year,total
                  ,xlab = "Year"
                  ,ylab = "PM2.5"
                  ,type = "l"
+                 ,main = "Total Emissions for Baltimore City, Maryland (fips == 24510)"
             )
     )
 
